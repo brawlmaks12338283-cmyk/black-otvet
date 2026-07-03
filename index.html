@@ -3,337 +3,709 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Black Otvet</title>
+    <title>Black Otvet — Форум</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
         body {
-            background-color: #0b0b0b;
+            background: #0a0a0a;
             color: #d0d0d0;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            padding: 30px 20px;
         }
 
-        .container {
-            width: 960px;
-            max-width: 96%;
-            background: #1a1a1a;
-            border-radius: 24px;
-            padding: 28px 32px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
-            border: 1px solid #2e2e2e;
+        .app {
+            max-width: 1000px;
+            width: 100%;
+            background: #141414;
+            border-radius: 28px;
+            padding: 30px 35px;
+            border: 1px solid #2a2a2a;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9);
         }
 
-        /* Шапка */
+        /* ===== HEADER ===== */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #2a2a2a;
+            border-bottom: 2px solid #222;
             padding-bottom: 18px;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .logo {
-            font-size: 28px;
+            font-size: 30px;
             font-weight: 700;
+            color: #eee;
             letter-spacing: 1px;
-            color: #f0f0f0;
         }
         .logo span {
-            color: #777;
+            color: #666;
             font-weight: 300;
         }
 
-        .user-actions button {
-            background: #2a2a2a;
-            border: none;
+        .header-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .header-actions button {
+            background: #222;
+            border: 1px solid #333;
             color: #ccc;
-            padding: 8px 18px;
+            padding: 8px 20px;
             border-radius: 40px;
             font-size: 14px;
             font-weight: 500;
             cursor: pointer;
             transition: 0.2s;
-            margin-left: 8px;
         }
-        .user-actions button:hover {
-            background: #3d3d3d;
+        .header-actions button:hover {
+            background: #333;
+            border-color: #555;
             color: #fff;
         }
 
-        /* Панель инструментов */
-        .toolbar {
+        /* ===== НАВИГАЦИЯ ===== */
+        .nav {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 28px;
+            gap: 10px;
+            margin-bottom: 22px;
         }
 
-        .toolbar button {
-            background: #242424;
-            border: 1px solid #333;
-            color: #c0c0c0;
+        .nav button {
+            background: #1c1c1c;
+            border: 1px solid #2e2e2e;
+            color: #bbb;
             padding: 10px 22px;
             border-radius: 40px;
             font-size: 14px;
             font-weight: 500;
             cursor: pointer;
             transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
-        .toolbar button:hover {
-            background: #333;
-            border-color: #555;
+        .nav button:hover {
+            background: #2c2c2c;
+            border-color: #4a4a4a;
             color: #fff;
         }
-        .toolbar .primary {
-            background: #3a3a3a;
-            border-color: #555;
-            color: #f0f0f0;
-        }
-        .toolbar .primary:hover {
-            background: #4a4a4a;
+        .nav .active {
+            background: #333;
+            border-color: #5a5a5a;
+            color: #fff;
         }
 
-        /* Поле поиска */
-        .search-bar {
+        /* ===== ПОИСК ===== */
+        .search-row {
             display: flex;
-            gap: 10px;
-            margin-bottom: 28px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
-        .search-bar input {
+        .search-row input {
             flex: 1;
-            background: #151515;
-            border: 1px solid #2e2e2e;
+            background: #111;
+            border: 1px solid #2a2a2a;
             border-radius: 40px;
-            padding: 14px 22px;
+            padding: 14px 24px;
             color: #ddd;
             font-size: 15px;
             outline: none;
             transition: 0.25s;
         }
-        .search-bar input:focus {
-            border-color: #5a5a5a;
-            background: #1e1e1e;
+        .search-row input:focus {
+            border-color: #555;
+            background: #1a1a1a;
         }
-        .search-bar button {
-            background: #2a2a2a;
+        .search-row button {
+            background: #222;
             border: 1px solid #3a3a3a;
             color: #ccc;
-            padding: 0 28px;
+            padding: 0 32px;
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
         }
-        .search-bar button:hover {
+        .search-row button:hover {
+            background: #333;
+            color: #fff;
+        }
+
+        /* ===== СПИСОК ТЕМ ===== */
+        .topics-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            margin-bottom: 20px;
+        }
+
+        .topic-item {
+            background: #121212;
+            border-radius: 14px;
+            padding: 16px 22px;
+            border: 1px solid #222;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+        .topic-item:hover {
+            background: #1e1e1e;
+            border-color: #3a3a3a;
+        }
+        .topic-item .topic-title {
+            color: #eee;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .topic-item .topic-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 14px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .topic-item .topic-meta span {
+            color: #888;
+        }
+        .topic-item .topic-meta .author {
+            color: #aaa;
+        }
+
+        /* ===== ПОСТЫ ВНУТРИ ТЕМЫ ===== */
+        .thread-view {
+            display: none;
+            background: #111;
+            border: 1px solid #2a2a2a;
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin: 6px 0 18px 0;
+        }
+        .thread-view.show {
+            display: block;
+        }
+
+        .thread-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #222;
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .thread-header h2 {
+            color: #eee;
+            font-size: 22px;
+        }
+        .thread-header .back-btn {
+            background: #1c1c1c;
+            border: 1px solid #333;
+            color: #aaa;
+            padding: 6px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .thread-header .back-btn:hover {
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        .post {
+            background: #151515;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border: 1px solid #222;
+        }
+        .post .post-author {
+            color: #aaa;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .post .post-date {
+            color: #555;
+            font-size: 13px;
+            margin-left: 12px;
+            font-weight: 400;
+        }
+        .post .post-body {
+            color: #ccc;
+            line-height: 1.6;
+            margin-top: 6px;
+        }
+
+        .reply-area {
+            margin-top: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .reply-area textarea {
+            background: #111;
+            border: 1px solid #2e2e2e;
+            border-radius: 14px;
+            padding: 14px 18px;
+            color: #ddd;
+            font-size: 15px;
+            outline: none;
+            min-height: 80px;
+            resize: vertical;
+            transition: 0.2s;
+        }
+        .reply-area textarea:focus {
+            border-color: #555;
+            background: #181818;
+        }
+        .reply-area button {
+            align-self: flex-end;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            color: #ddd;
+            padding: 10px 32px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .reply-area button:hover {
             background: #3a3a3a;
             color: #fff;
         }
 
-        /* Список писем */
-        .mail-list {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .mail-item {
-            background: #141414;
-            border-radius: 16px;
-            padding: 16px 22px;
-            display: flex;
+        /* ===== МОДАЛКА НОВОЙ ТЕМЫ ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(6px);
+            justify-content: center;
             align-items: center;
-            justify-content: space-between;
-            border: 1px solid #242424;
-            transition: 0.15s;
-            cursor: default;
+            z-index: 999;
         }
-        .mail-item:hover {
-            background: #1f1f1f;
-            border-color: #3a3a3a;
-        }
-
-        .mail-info {
+        .modal-overlay.show {
             display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .mail-info .from {
-            font-weight: 600;
-            color: #e0e0e0;
-            min-width: 140px;
-        }
-        .mail-info .subject {
-            color: #b0b0b0;
-        }
-        .mail-info .subject span {
-            color: #6a6a6a;
-            margin-right: 10px;
         }
 
-        .mail-date {
-            color: #555;
-            font-size: 14px;
-            white-space: nowrap;
+        .modal {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 28px;
+            padding: 35px 40px;
+            max-width: 540px;
+            width: 94%;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.9);
         }
-
-        /* Кнопка действия у письма */
-        .mail-actions button {
-            background: transparent;
+        .modal h2 {
+            color: #eee;
+            margin-bottom: 22px;
+            font-weight: 500;
+        }
+        .modal input, .modal textarea {
+            width: 100%;
+            background: #111;
             border: 1px solid #2e2e2e;
-            color: #888;
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 13px;
-            cursor: pointer;
+            border-radius: 14px;
+            padding: 14px 18px;
+            color: #ddd;
+            font-size: 15px;
+            outline: none;
+            margin-bottom: 16px;
             transition: 0.2s;
-            margin-left: 12px;
         }
-        .mail-actions button:hover {
+        .modal input:focus, .modal textarea:focus {
+            border-color: #555;
+            background: #181818;
+        }
+        .modal textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .modal .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 6px;
+        }
+        .modal .modal-actions button {
+            padding: 10px 30px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #3a3a3a;
+            background: #222;
+            color: #ccc;
+            transition: 0.2s;
+        }
+        .modal .modal-actions button:hover {
+            background: #333;
+            color: #fff;
+        }
+        .modal .modal-actions .btn-create {
             background: #2a2a2a;
-            border-color: #4a4a4a;
+            border-color: #555;
             color: #eee;
         }
+        .modal .modal-actions .btn-create:hover {
+            background: #3d3d3d;
+        }
 
-        /* Футер */
-        .footer {
-            margin-top: 36px;
-            border-top: 1px solid #262626;
-            padding-top: 20px;
+        /* ===== СТАТУС ===== */
+        .status-bar {
             display: flex;
             justify-content: space-between;
+            border-top: 1px solid #222;
+            padding-top: 18px;
+            margin-top: 6px;
             color: #4a4a4a;
             font-size: 14px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
-        .footer a {
-            color: #666;
+        .status-bar a {
+            color: #555;
             text-decoration: none;
-            margin-left: 20px;
+            margin-left: 18px;
             transition: 0.2s;
         }
-        .footer a:hover {
+        .status-bar a:hover {
             color: #aaa;
         }
 
-        /* Адаптив */
+        /* ===== АДАПТИВ ===== */
         @media (max-width: 700px) {
-            .container { padding: 20px 16px; }
-            .mail-info { gap: 10px; }
-            .mail-info .from { min-width: 100px; }
-            .mail-actions button { margin-left: 6px; padding: 4px 12px; }
-            .toolbar button { padding: 8px 14px; }
+            .app { padding: 18px 14px; }
+            .topic-item { padding: 14px 16px; }
+            .modal { padding: 24px 20px; }
+            .thread-view { padding: 18px 16px; }
+            .header-actions button { padding: 6px 14px; font-size: 13px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
 
-        <!-- Шапка -->
-        <div class="header">
-            <div class="logo">BLACK <span>OTVET</span></div>
-            <div class="user-actions">
-                <button>✉️ Написать</button>
-                <button>⚙️</button>
-            </div>
+<div class="app">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">BLACK <span>OTVET</span></div>
+        <div class="header-actions">
+            <button onclick="openModal()">➕ Новая тема</button>
+            <button onclick="refreshForum()">🔄 Обновить</button>
         </div>
-
-        <!-- Панель кнопок -->
-        <div class="toolbar">
-            <button class="primary">📥 Входящие</button>
-            <button>📤 Отправленные</button>
-            <button>⭐ Избранное</button>
-            <button>🗑️ Корзина</button>
-            <button style="margin-left: auto;">➕ Создать папку</button>
-        </div>
-
-        <!-- Поиск -->
-        <div class="search-bar">
-            <input type="text" placeholder="Поиск по письмам...">
-            <button>🔍 Найти</button>
-        </div>
-
-        <!-- Список писем -->
-        <div class="mail-list">
-
-            <div class="mail-item">
-                <div class="mail-info">
-                    <span class="from">Анна К.</span>
-                    <span class="subject"><span>📎</span> Договор + правки</span>
-                </div>
-                <div class="mail-actions">
-                    <span class="mail-date">Сегодня, 14:23</span>
-                    <button>Ответить</button>
-                </div>
-            </div>
-
-            <div class="mail-item">
-                <div class="mail-info">
-                    <span class="from">Техподдержка</span>
-                    <span class="subject"><span>⚡</span> Обновление системы 26.07</span>
-                </div>
-                <div class="mail-actions">
-                    <span class="mail-date">Вчера, 18:10</span>
-                    <button>Ответить</button>
-                </div>
-            </div>
-
-            <div class="mail-item">
-                <div class="mail-info">
-                    <span class="from">Максим Р.</span>
-                    <span class="subject"><span>📄</span> Смета за июнь</span>
-                </div>
-                <div class="mail-actions">
-                    <span class="mail-date">Вчера, 09:45</span>
-                    <button>Ответить</button>
-                </div>
-            </div>
-
-            <div class="mail-item">
-                <div class="mail-info">
-                    <span class="from">Реклама</span>
-                    <span class="subject"><span>🔔</span> Спецпредложение до пятницы</span>
-                </div>
-                <div class="mail-actions">
-                    <span class="mail-date">22 июл, 16:02</span>
-                    <button>Ответить</button>
-                </div>
-            </div>
-
-            <div class="mail-item">
-                <div class="mail-info">
-                    <span class="from">Дмитрий С.</span>
-                    <span class="subject"><span>📌</span> Встреча в 15:00</span>
-                </div>
-                <div class="mail-actions">
-                    <span class="mail-date">21 июл, 11:30</span>
-                    <button>Ответить</button>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Футер -->
-        <div class="footer">
-            <span>Black Otvet — минимализм без компромиссов</span>
-            <div>
-                <a href="#">Помощь</a>
-                <a href="#">Настройки</a>
-                <a href="#">Выйти</a>
-            </div>
-        </div>
-
     </div>
+
+    <!-- НАВИГАЦИЯ -->
+    <div class="nav">
+        <button class="active" data-cat="all" onclick="filterCategory('all', this)">📋 Все темы</button>
+        <button data-cat="general" onclick="filterCategory('general', this)">💬 Общий</button>
+        <button data-cat="tech" onclick="filterCategory('tech', this)">⚙️ Техподдержка</button>
+        <button data-cat="offtop" onclick="filterCategory('offtop', this)">🎉 Офтоп</button>
+    </div>
+
+    <!-- ПОИСК -->
+    <div class="search-row">
+        <input type="text" id="searchInput" placeholder="Поиск по темам..." oninput="searchTopics()">
+        <button onclick="searchTopics()">🔍 Найти</button>
+    </div>
+
+    <!-- СПИСОК ТЕМ -->
+    <div id="topicsList" class="topics-list"></div>
+
+    <!-- ПРОСМОТР ТЕМЫ -->
+    <div id="threadView" class="thread-view">
+        <div class="thread-header">
+            <h2 id="threadTitle">Заголовок темы</h2>
+            <button class="back-btn" onclick="closeThread()">← Назад</button>
+        </div>
+        <div id="postsContainer"></div>
+        <div class="reply-area">
+            <textarea id="replyInput" placeholder="Написать ответ..."></textarea>
+            <button onclick="addReply()">📤 Ответить</button>
+        </div>
+    </div>
+
+    <!-- СТАТУС -->
+    <div class="status-bar">
+        <span id="counter">Тем: 0</span>
+        <div>
+            <a href="#" onclick="refreshForum()">Обновить</a>
+            <a href="#" onclick="openModal()">Создать тему</a>
+        </div>
+    </div>
+</div>
+
+<!-- ===== МОДАЛКА НОВОЙ ТЕМЫ ===== -->
+<div id="modal" class="modal-overlay">
+    <div class="modal">
+        <h2>📝 Создать тему</h2>
+        <input type="text" id="newTitle" placeholder="Заголовок темы">
+        <select id="newCategory" style="width:100%; background:#111; border:1px solid #2e2e2e; border-radius:14px; padding:14px 18px; color:#ddd; font-size:15px; outline:none; margin-bottom:16px;">
+            <option value="general">💬 Общий</option>
+            <option value="tech">⚙️ Техподдержка</option>
+            <option value="offtop">🎉 Офтоп</option>
+        </select>
+        <textarea id="newBody" placeholder="Текст первого сообщения..."></textarea>
+        <div class="modal-actions">
+            <button onclick="closeModal()">Отмена</button>
+            <button class="btn-create" onclick="createTopic()">✅ Создать</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ============================================================
+    //  ДАННЫЕ ФОРУМА
+    // ============================================================
+    let topics = [];
+    let nextId = 1;
+    let currentCategory = 'all';
+    let currentTopicId = null;
+
+    // ============================================================
+    //  ИНИЦИАЛИЗАЦИЯ (стартовые темы)
+    // ============================================================
+    function initForum() {
+        topics = [
+            {
+                id: nextId++,
+                title: 'Добро пожаловать на Black Otvet!',
+                category: 'general',
+                author: 'Admin',
+                date: 'Сегодня, 12:00',
+                posts: [
+                    { author: 'Admin', date: 'Сегодня, 12:00', body: 'Приветствуем всех на нашем новом форуме! Здесь можно обсуждать любые темы. Соблюдайте правила.' },
+                    { author: 'Модератор', date: 'Сегодня, 12:15', body: 'Добавлю: правила читаем в закреплённом посте. Будьте вежливы.' }
+                ]
+            },
+            {
+                id: nextId++,
+                title: 'Проблемы с входом на сайт',
+                category: 'tech',
+                author: 'Пользователь',
+                date: 'Сегодня, 10:30',
+                posts: [
+                    { author: 'Пользователь', date: 'Сегодня, 10:30', body: 'Не могу зайти в личный кабинет, пишет ошибку 502. Что делать?' },
+                    { author: 'Admin', date: 'Сегодня, 10:45', body: 'Проверили, всё работает. Попробуй очистить кэш браузера или зайти с другого устройства.' }
+                ]
+            },
+            {
+                id: nextId++,
+                title: 'Какую музыку слушаете?',
+                category: 'offtop',
+                author: 'Музыкант',
+                date: 'Вчера, 22:15',
+                posts: [
+                    { author: 'Музыкант', date: 'Вчера, 22:15', body: 'Интересно, что слушают участники форума? Я за рок и металл.' },
+                    { author: 'DJ', date: 'Вчера, 23:00', body: 'А я за электронику и хаус. Люблю наушники и релакс.' }
+                ]
+            }
+        ];
+        render();
+    }
+
+    // ============================================================
+    //  ОТРИСОВКА
+    // ============================================================
+    function render() {
+        const list = document.getElementById('topicsList');
+        const query = document.getElementById('searchInput').value.toLowerCase();
+        let filtered = topics;
+
+        // Категория
+        if (currentCategory !== 'all') {
+            filtered = filtered.filter(t => t.category === currentCategory);
+        }
+
+        // Поиск
+        if (query) {
+            filtered = filtered.filter(t =>
+                t.title.toLowerCase().includes(query) ||
+                t.author.toLowerCase().includes(query) ||
+                t.posts.some(p => p.body.toLowerCase().includes(query))
+            );
+        }
+
+        // Сортировка (сначала новые)
+        filtered.sort((a, b) => b.id - a.id);
+
+        if (filtered.length === 0) {
+            list.innerHTML = `<div style="text-align:center; padding:40px 0; color:#444;">📭 Нет тем</div>`;
+        } else {
+            list.innerHTML = filtered.map(t => `
+                <div class="topic-item" onclick="openThread(${t.id})">
+                    <div class="topic-title">${t.title}</div>
+                    <div class="topic-meta">
+                        <span>👤 <span class="author">${t.author}</span> &nbsp;•&nbsp; ${t.date}</span>
+                        <span>💬 ${t.posts.length} ответов</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.getElementById('counter').textContent = `Тем: ${topics.length}`;
+    }
+
+    // ============================================================
+    //  ОТКРЫТЬ/ЗАКРЫТЬ ТЕМУ
+    // ============================================================
+    function openThread(id) {
+        currentTopicId = id;
+        const topic = topics.find(t => t.id === id);
+        if (!topic) return;
+
+        document.getElementById('threadTitle').textContent = topic.title;
+        const container = document.getElementById('postsContainer');
+        container.innerHTML = topic.posts.map(p => `
+            <div class="post">
+                <div class="post-author">
+                    ${p.author}
+                    <span class="post-date">${p.date}</span>
+                </div>
+                <div class="post-body">${p.body}</div>
+            </div>
+        `).join('');
+
+        document.getElementById('threadView').classList.add('show');
+        document.getElementById('topicsList').style.display = 'none';
+        document.getElementById('replyInput').value = '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function closeThread() {
+        document.getElementById('threadView').classList.remove('show');
+        document.getElementById('topicsList').style.display = 'block';
+        currentTopicId = null;
+        render();
+    }
+
+    // ============================================================
+    //  ДОБАВИТЬ ОТВЕТ
+    // ============================================================
+    function addReply() {
+        if (currentTopicId === null) return;
+        const input = document.getElementById('replyInput');
+        const text = input.value.trim();
+        if (!text) {
+            alert('Напиши текст ответа!');
+            return;
+        }
+
+        const topic = topics.find(t => t.id === currentTopicId);
+        if (!topic) return;
+
+        const now = new Date();
+        const timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+
+        topic.posts.push({
+            author: 'Я (гость)',
+            date: 'Сегодня, ' + timeStr,
+            body: text
+        });
+
+        input.value = '';
+        openThread(currentTopicId); // перерисовываем
+        render();
+    }
+
+    // ============================================================
+    //  СОЗДАТЬ НОВУЮ ТЕМУ
+    // ============================================================
+    function createTopic() {
+        const title = document.getElementById('newTitle').value.trim();
+        const category = document.getElementById('newCategory').value;
+        const body = document.getElementById('newBody').value.trim();
+
+        if (!title || !body) {
+            alert('Заполни заголовок и текст!');
+            return;
+        }
+
+        const now = new Date();
+        const timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+
+        const newTopic = {
+            id: nextId++,
+            title: title,
+            category: category,
+            author: 'Я (гость)',
+            date: 'Сегодня, ' + timeStr,
+            posts: [
+                { author: 'Я (гость)', date: 'Сегодня, ' + timeStr, body: body }
+            ]
+        };
+
+        topics.push(newTopic);
+        closeModal();
+        render();
+
+        // Открываем только что созданную тему
+        openThread(newTopic.id);
+    }
+
+    // ============================================================
+    //  ФИЛЬТРЫ, ПОИСК, ОБНОВЛЕНИЕ
+    // ============================================================
+    function filterCategory(cat, btn) {
+        currentCategory = cat;
+        document.querySelectorAll('.nav button[data-cat]').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        if (currentTopicId !== null) closeThread();
+        render();
+    }
+
+    function searchTopics() {
+        if (currentTopicId !== null) closeThread();
+        render();
+    }
+
+    function refreshForum() {
+        if (currentTopicId !== null) closeThread();
+        render();
+    }
+
+    // ============================================================
+    //  МОДАЛКА
+    // ============================================================
+    function openModal() {
+        document.getElementById('modal').classList.add('show');
+        document.getElementById('newTitle').value = '';
+        document.getElementById('newBody').value = '';
+        document.getElementById('newCategory').value = 'general';
+    }
+
+    function closeModal() {
+        document.getElementById('modal').classList.remove('show');
+    }
+
+    document.getElementById('modal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    // ============================================================
+    //  СТАРТ
+    // ============================================================
+    initForum();
+</script>
+
 </body>
 </html>
