@@ -630,9 +630,9 @@
 
 <script>
     // ============================================================
-    //  АДМИН — ЗАДАЙ СВОЙ ЛОГИН ЗДЕСЬ!
+    //  АДМИН — ТОЛЬКО ДЛЯ Nepridumal384
     // ============================================================
-    const ADMIN_USERNAME = 'admin';   // <--- НАПИШИ СВОЙ ЛОГИН
+    const ADMIN_USERNAME = 'Nepridumal384';
 
     // ============================================================
     //  СИСТЕМА АККАУНТОВ
@@ -760,7 +760,7 @@
     }
 
     // ============================================================
-    //  ОБРАБОТКА АВТОРИЗАЦИИ
+    //  ОБРАБОТКА АВТОРИЗАЦИИ (с запретом повторов)
     // ============================================================
     function submitAuth() {
         const login = document.getElementById('authLogin').value.trim();
@@ -775,12 +775,13 @@
         const users = getUsers();
 
         if (authMode === 'register') {
-            if (password !== password2) {
-                alert('Пароли не совпадают!');
+            // Проверка на повтор ника
+            if (users[login]) {
+                alert('❌ Этот логин уже занят! Придумай другой.');
                 return;
             }
-            if (users[login]) {
-                alert('Пользователь с таким логином уже существует!');
+            if (password !== password2) {
+                alert('Пароли не совпадают!');
                 return;
             }
             if (password.length < 4) {
@@ -795,6 +796,7 @@
             return;
         }
 
+        // Логин
         if (!users[login]) {
             alert('❌ Пользователь не найден!');
             return;
@@ -807,7 +809,12 @@
         saveSession({ username: login });
         closeAuthModal();
         render();
-        alert('✅ Добро пожаловать, ' + login + '!');
+
+        if (login === ADMIN_USERNAME) {
+            alert('👑 Добро пожаловать, Админ!');
+        } else {
+            alert('✅ Добро пожаловать, ' + login + '!');
+        }
     }
 
     document.getElementById('authModal').addEventListener('click', function(e) {
@@ -890,7 +897,7 @@
     }
 
     // ============================================================
-    //  ОТКРЫТЬ/ЗАКРЫТЬ ТЕМУ
+    //  ОТКРЫТЬ/ЗАКРЫТЬ ТЕМУ (просмотр)
     // ============================================================
     function openThread(id) {
         if (!currentUser) {
@@ -907,7 +914,7 @@
         const container = document.getElementById('postsContainer');
 
         container.innerHTML = topic.posts.map((p, index) => {
-            const isAdminPost = p.author === Nepridumal384;
+            const isAdminPost = p.author === ADMIN_USERNAME;
             const adminTag = isAdminPost ? `<span class="admin-tag">👑 Админ</span>` : '';
             const deleteBtn = isAdmin() ? `
                 <button class="admin-delete-post" onclick="deletePost(${topic.id}, ${index})">✕</button>
@@ -938,7 +945,7 @@
     }
 
     // ============================================================
-    //  АДМИН-ФУНКЦИИ
+    //  АДМИН-ФУНКЦИИ (только для Nepridumal384)
     // ============================================================
     function deleteTopic(id) {
         if (!isAdmin()) return;
